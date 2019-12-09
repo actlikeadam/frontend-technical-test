@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { getData } from '../api';
+import { getVehiclesData } from '../api';
+import Vehicle from './Vehicle';
 
 export default
-class VehicleList extends Component {
+	class VehicleList extends Component {
 
 	constructor(props) {
 		super(props);
@@ -13,20 +14,25 @@ class VehicleList extends Component {
 	}
 
 	componentDidMount() {
-		getData((data) => {
+		getVehiclesData((json) => {
+			const obj = JSON.parse(json);
+
 			this.setState({
-				data
+				data: obj.vehicles ? obj.vehicles : []
 			})
 		});
 	}
 
 	render() {
-		if(this.state.data) {
-			console.log(this.state.data);
-		    return (
-			    <h1>Hello World</h1>
-		    )
-	    }
+		if (this.state.data != null) {
+			var vehicles = this.state.data.map(vehicle => {
+				return <Vehicle key={`vehicle_${vehicle.id}`} vehicle={vehicle} />;
+			});
+
+			return <div className="row no-gutters text-center">
+				{vehicles}
+			</div>;
+		}
 
 		return (<h1>Loading...</h1>);
 	}

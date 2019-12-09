@@ -1,0 +1,68 @@
+@import 'bootstrap.scss';
+@import 'mixin.scss';
+
+body {
+	background-color: #fafafa;
+}
+
+.tt-v {
+	&:last-child {
+		display: none;
+	}
+
+	&-image {
+		display: block;
+		width: 100%;
+
+		@include small {
+			object-fit: cover;
+		}
+	}
+
+	&-overview {
+    padding: 0 15% 5%;
+		
+		div {
+			margin-top: 10px;
+		}
+	}
+
+	&-name {
+		font-size: 1.3em;
+    text-transform: uppercase;
+		margin: 1.5em auto 1em;
+		
+		&:before {
+			content: "";
+			display: block;
+			margin: 0 auto;
+			width: 43%;
+			padding-bottom: 5px;
+			border-top: 1px solid black;
+		}
+		
+		&:after {
+			content: "";
+			display: block;
+			margin: 0 auto;
+			width: 43%;
+			padding-top: 5px;
+			border-bottom: 1px solid black;
+		}
+
+		&:before, &:after {
+			@include small {
+				border: none;
+				padding: 0;
+			}
+			
+			@include medium {
+				width: 52%;
+			}
+		}
+	}
+
+	@include small {
+		text-align: left;
+	}
+}

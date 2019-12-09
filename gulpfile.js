@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const cssnano = require('gulp-cssnano');
 const browserify = require('browserify');
 const babelify = require('babelify');
 const babel = require('babel-register');
@@ -20,9 +21,19 @@ gulp.task('js:watch', function () {
 });
 
 gulp.task('sass', function () {
-    return gulp.src('./src/style.scss')
+    return gulp.src('./src/sass/style.scss')
         .pipe(sass().on('error', sass.logError))
+        .pipe(cssnano())
         .pipe(gulp.dest('./dist'));
+});
+
+gulp.task('sass:watch', function () {
+    gulp.watch('./src/**/*.scss', ['sass']);
+});
+
+gulp.task('images', function () {
+    return gulp.src('./images/*.jpg')
+      .pipe(gulp.dest('./dist/images'));
 });
 
 gulp.task('sass:watch', function () {
@@ -46,5 +57,5 @@ gulp.task('server:watch', function () {
 });
 
 gulp.task('default', function () {
-  gulp.start('sass', 'sass:watch', 'js', 'js:watch', 'server', 'server:watch');
+  gulp.start('sass', 'sass:watch', 'images', 'js', 'js:watch', 'server', 'server:watch');
 });
