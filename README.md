@@ -1,5 +1,7 @@
 Frontend Technical Test for Connect Group [www.connect-group.com](http://www.connect-group.com/)
 
+Date: December 2019
+
 #### Requirements
 * [Node.js](https://nodejs.org/en/)(6.x.x)
 * Gulp
